@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Panel | User Management API</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/common.js" defer></script>
+    <script src="/js/admin.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar container" aria-label="Main navigation">
+        <a class="brand" href="/">User Management API</a>
+        <button class="menu-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          Menu
+        </button>
+        <div class="nav-links" id="site-nav"></div>
+      </nav>
+    </header>
+
+    <main class="container page-section">
+      <section class="page-intro admin-intro">
+        <div>
+          <span class="eyebrow">Administration</span>
+          <h1>Manage users</h1>
+          <p>Review account status and manage registered users.</p>
+        </div>
+        <label class="filter-control" for="user-filter">
+          <span>Filter by status</span>
+          <select id="user-filter">
+            <option value="all">All users</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </label>
+      </section>
+
+      <div class="alert alert-success" id="admin-success" role="status" aria-live="polite" hidden></div>
+      <div class="alert alert-error" id="admin-error" role="alert" aria-live="polite" hidden></div>
+
+      <section class="summary-grid" aria-label="User summary">
+        <article class="card summary-card">
+          <span>Total users</span>
+          <strong id="total-users">—</strong>
+        </article>
+        <article class="card summary-card summary-pending">
+          <span>Pending</span>
+          <strong id="pending-users">—</strong>
+        </article>
+        <article class="card summary-card summary-approved">
+          <span>Approved</span>
+          <strong id="approved-users">—</strong>
+        </article>
+        <article class="card summary-card summary-rejected">
+          <span>Rejected</span>
+          <strong id="rejected-users">—</strong>
+        </article>
+      </section>
+
+      <section class="card table-card">
+        <div class="card-heading table-heading">
+          <div>
+            <span class="eyebrow">Accounts</span>
+            <h2>User list</h2>
+          </div>
+          <span class="muted" id="user-list-count"></span>
+        </div>
+        <div class="loading-state" id="users-loading" hidden>
+          <span class="spinner" aria-hidden="true"></span>
+          <span>Loading users...</span>
+        </div>
+        <div class="empty-state" id="users-empty" hidden>No users found.</div>
+        <div class="table-scroll" id="users-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Status</th>
+                <th scope="col">Created date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="users-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="confirm-modal" hidden>
+      <section class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-description">
+        <span class="eyebrow">Please confirm</span>
+        <h2 id="confirm-title">Confirm action</h2>
+        <p id="confirm-description"></p>
+        <div class="button-row modal-actions">
+          <button class="button button-secondary" id="cancel-action" type="button">Cancel</button>
+          <button class="button button-primary" id="confirm-action" type="button">Confirm</button>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
